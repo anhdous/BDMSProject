@@ -1,0 +1,11 @@
+/Users/anhdo.us/Desktop/BDMS/ApplicationCore/obj/Debug/net9.0/ApplicationCore.GeneratedMSBuildEditorConfig.editorconfig
+/Users/anhdo.us/Desktop/BDMS/ApplicationCore/obj/Debug/net9.0/ApplicationCore.AssemblyInfoInputs.cache
+/Users/anhdo.us/Desktop/BDMS/ApplicationCore/obj/Debug/net9.0/ApplicationCore.AssemblyInfo.cs
+/Users/anhdo.us/Desktop/BDMS/ApplicationCore/obj/Debug/net9.0/ApplicationCore.csproj.CoreCompileInputs.cache
+/Users/anhdo.us/Desktop/BDMS/ApplicationCore/bin/Debug/net9.0/ApplicationCore.deps.json
+/Users/anhdo.us/Desktop/BDMS/ApplicationCore/bin/Debug/net9.0/ApplicationCore.dll
+/Users/anhdo.us/Desktop/BDMS/ApplicationCore/bin/Debug/net9.0/ApplicationCore.pdb
+/Users/anhdo.us/Desktop/BDMS/ApplicationCore/obj/Debug/net9.0/ApplicationCore.dll
+/Users/anhdo.us/Desktop/BDMS/ApplicationCore/obj/Debug/net9.0/refint/ApplicationCore.dll
+/Users/anhdo.us/Desktop/BDMS/ApplicationCore/obj/Debug/net9.0/ApplicationCore.pdb
+/Users/anhdo.us/Desktop/BDMS/ApplicationCore/obj/Debug/net9.0/ref/ApplicationCore.dll
