@@ -1,0 +1,19 @@
+# Build output
+bin/
+obj/
+
+# Mac Finder
+.DS_Store
+
+# Visual Studio / VS Code
+.vscode/
+*.user
+*.suo
+*.userprefs
+
+# .NET artifacts
+*.dll
+*.exe
+*.pdb
+*.cache
+*.loggit 
