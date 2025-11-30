@@ -1,0 +1,68 @@
+@model ApplicationCore.Models.ScheduleAppointmentModel
+@{
+    ViewData["Title"] = "Schedule Appointment";
+    var drives = ViewBag.Drives; // each has Id, Location, Title
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="ScheduleAppointment" method="post" class="mt-3">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label for="BDID" class="form-label">Location</label>
+        <select asp-for="BDID" class="form-select" required>
+            <option value="">-- Select a Location --</option>
+            @foreach (var d in drives)
+            {
+                <option value="@d.BDID" data-title="@d.Title" data-location="@d.Location">
+                    @d.Location
+                </option>
+            }
+        </select>
+        <span class="text-danger" data-valmsg-for="BDID"></span>
+    </div>
+    <input type="hidden" asp-for="Location" id="SelectedLocation" />
+
+    <div class="mb-3">
+        <label class="form-label">Event Name</label>
+        <div id="titleDisplay" class="form-control-plaintext fw-semibold"></div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Date" class="form-label"></label>
+        <input asp-for="Date" type="date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Time" class="form-label"></label>
+        <input asp-for="Time" type="time" class="form-control" />
+        <span asp-validation-for="Time" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Schedule</button>
+</form>
+
+@section Scripts {
+  <partial name="_ValidationScriptsPartial" />
+  <script>
+    (function () {
+        const select = document.getElementById('BDID');
+      const titleDiv = document.getElementById('titleDisplay');
+      const hiddenLocation = document.getElementById('SelectedLocation');
+
+      function updateFromSelection() {
+        const opt = select.options[select.selectedIndex];
+        const title = opt?.getAttribute('data-title') || '';
+        const location = opt?.getAttribute('data-location') || '';
+
+        titleDiv.textContent = title;
+        hiddenLocation.value = location;
+      }
+
+      select.addEventListener('change', updateFromSelection);
+      updateFromSelection(); // initialize when page loads
+    })();
+  </script>
+}

@@ -74,5 +74,19 @@ public class UserController: Controller
       await HttpContext.SignOutAsync();
       return RedirectToAction("Login");
   }
+    [HttpGet]
+    public IActionResult AccessDenied()
+    {
+        return View();
+    }
+    public IActionResult DebugClaims()
+{
+    var lines = User.Claims.Select(c => $"{c.Type} = {c.Value}");
+    return Content(string.Join("\n", lines));
+}
+public IActionResult TestRole()
+{
+    return Content($"IsInRole(Donor) = {User.IsInRole("Donor")}");
+}
 
 }
