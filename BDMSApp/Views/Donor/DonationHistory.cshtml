@@ -1,0 +1,28 @@
+@model List<ApplicationCore.Models.DonationHistoryListModel>
+@{
+    ViewData["Title"] = "Donation Records";
+}
+
+<h2>@ViewData["Title"]</h2>
+<table class="table table-bordered table-striped">
+<thead>
+  <tr>
+      <th>Donation Date</th>
+      <th>Location</th>
+      <th>Collected Volume</th>
+      <th>Staff Name</th>
+
+  </tr>
+  </thead>
+  <tbody>
+    @foreach (var m in Model)
+    {
+        <tr>
+        <td>@m.DonationDate.ToString("MMM dd, yyyy")</td>
+        <td>@m.Location</td>
+        <td>@m.CollectedVolume</td>
+        <td>@m.StaffName</td>
+        </tr>
+    }
+  </tbody>
+</table>

@@ -13,4 +13,9 @@ public class BloodDriveService: IBloodDriveService
     var bds = await _bloodDriveRepository.GetAllBloodDrives();
     return bds;
   }
+  public async Task<List<BloodDriveModel>> GetOpenBloodDrives()
+  {
+    var bds = await _bloodDriveRepository.GetOpenBloodDrives();
+    return bds;
+  }
 }

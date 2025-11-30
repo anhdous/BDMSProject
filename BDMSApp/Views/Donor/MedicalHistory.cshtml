@@ -1,0 +1,28 @@
+@model List<ApplicationCore.Models.MedicalHistoryListModel>
+@{
+    ViewData["Title"] = "Medical History Records";
+}
+
+<h2>@ViewData["Title"]</h2>
+<table class="table table-bordered table-striped">
+<thead>
+  <tr>
+      <th>Condition Name</th>
+      <th>Diagnosis Date</th>
+      <th>Recovery Date</th>
+      <th>Status</th>
+
+  </tr>
+  </thead>
+  <tbody>
+    @foreach (var r in Model)
+    {
+        <tr>
+        <td>@r.ConditionName</td>
+        <td>@r.DiagnosisDate.ToString("MMM dd, yyyy")</td>
+        <td>@r.RecoveryDate.ToString("MMM dd, yyyy")</td>
+        <td>@r.Status</td>
+        </tr>
+    }
+  </tbody>
+</table>

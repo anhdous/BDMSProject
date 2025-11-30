@@ -9,3 +9,4 @@
 /Users/anhdo.us/Desktop/BDMS/ApplicationCore/obj/Debug/net9.0/refint/ApplicationCore.dll
 /Users/anhdo.us/Desktop/BDMS/ApplicationCore/obj/Debug/net9.0/ApplicationCore.pdb
 /Users/anhdo.us/Desktop/BDMS/ApplicationCore/obj/Debug/net9.0/ref/ApplicationCore.dll
+/Users/anhdo.us/Desktop/BDMS/ApplicationCore/obj/Debug/net9.0/ApplicationCore.sourcelink.json

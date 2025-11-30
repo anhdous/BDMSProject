@@ -18,4 +18,14 @@ public class DonorService: IDonorService
     var historylist = await _donorRepository.GetMedicalHistory(Id);
     return historylist;
   }
+    public async Task<int> AddAppointment(ScheduleAppointmentModel m)
+  {
+    var res = await _donorRepository.AddAppointment(m);
+    return res;
+  }
+  public async Task<List<DonationHistoryListModel>> GetDonationHistory(int Id)
+  {
+    var historylist = await _donorRepository.GetDonationHistory(Id);
+    return historylist;
+  }
 }

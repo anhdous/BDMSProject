@@ -18,5 +18,18 @@ namespace Infrastructure.Repositories{
         "SELECT * FROM dbo.BloodDrive ORDER BY StartDate Desc");
     return bds.ToList();
     }
+  
+  public async Task<List<BloodDriveModel>> GetOpenBloodDrives()
+  {
+    const string sql = @"
+        SELECT BDID, Location, Title
+        FROM dbo.BloodDrive
+        WHERE CAST(GETUTCDATE() AS date) <= EndDate
+        ORDER BY StartDate;";
+    var cs = _cfg.GetConnectionString("Default");
+    using var conn = new SqlConnection(cs);
+    var result = await conn.QueryAsync<BloodDriveModel>(sql);
+    return result.ToList();
+  }
   }
 }
