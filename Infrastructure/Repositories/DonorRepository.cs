@@ -27,5 +27,33 @@ namespace Infrastructure.Repositories{
         "SELECT * FROM dbo.MedicalHistory WHERE DonorId = @Id ORDER BY DiagnosisDate Desc", new { Id });
     return donors.ToList();
   }
+
+  public async Task<int> AddAppointment(ScheduleAppointmentModel m)
+  {
+    DateTime aptDateTime = m.Date.ToDateTime(m.Time);
+    const string sql = @"
+        INSERT INTO dbo.Appointment ( DateTime, Location, Status, DonorID, BDID)
+        VALUES (@DateTime, @Location, 'Scheduled', @DonorID, @BDID);
+        SELECT CAST(SCOPE_IDENTITY() AS int);";
+    var parameters = new
+    {
+      Location = m.Location,
+      DateTime = aptDateTime,
+      DonorID = m.DonorID,
+      BDID = m.BDID
+    };
+    var cs = _cfg.GetConnectionString("Default");
+    using var conn = new SqlConnection(cs);
+    return await conn.ExecuteScalarAsync<int>(sql, parameters);
+  }
+
+  public async Task<List<DonationHistoryListModel>> GetDonationHistory(int Id)
+  {
+    var cs = _cfg.GetConnectionString("Default");
+    using var conn = new SqlConnection(cs);
+    var dh = await conn.QueryAsync<DonationHistoryListModel>(
+        "SELECT DonationDate, [Location], CollectedVolume, ht.FullName AS StaffName FROM dbo.Donation d JOIN HospitalStaff ht ON ht.StaffID = d.StaffID WHERE DonorId = @Id ORDER BY DonationDate Desc", new { Id });
+    return dh.ToList();
+  }
   }
 }

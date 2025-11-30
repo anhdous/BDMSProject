@@ -5,6 +5,7 @@ public interface IBloodDriveRepository
    // CRUD methods
    // get all blood drives from database
    Task<List<BloodDriveModel>> GetAllBloodDrives();
+   Task<List<BloodDriveModel>> GetOpenBloodDrives();
   
  }
 

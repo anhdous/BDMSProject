@@ -18,5 +18,5 @@ public class UserRepository : IUserRepository
     var user = await conn.QueryAsync<UserLoginSuccessModel>(
         "SELECT * FROM dbo.UserAccount Where Email = @Email", new { Email = email });
     return user.FirstOrDefault();
-    }
+  }
 }
