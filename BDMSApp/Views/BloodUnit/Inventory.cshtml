@@ -1,51 +1,51 @@
 @model ApplicationCore.Models.BloodInventoryFilterModel
 
-<h2>Blood Inventory Search</h2>
+<h3>Blood Inventory Search</h3>
 
 <form method="post">
     <div class="row">
 
-        <div class="col-md-3">
-            <label>Component Type</label>
-            <select class="form-control" asp-for="ComponentType">
-                <option value="">-- All --</option>
-                <option>RBC</option>
-                <option>Plasma</option>
-                <option>Platelets</option>
-                <option>Cryoprecipitate</option>
-            </select>
-        </div>
+      <div class="col-md-3">
+          <label>Component Type</label>
+          <select class="form-control" asp-for="ComponentType">
+              <option value="">-- All --</option>
+              <option>RBC</option>
+              <option>Plasma</option>
+              <option>Platelets</option>
+              <option>Cryoprecipitate</option>
+          </select>
+      </div>
 
-        <div class="col-md-3">
-            <label>Blood Type</label>
-            <select class="form-control" asp-for="BloodType">
-                <option value="">-- All --</option>
-                <option>A</option>
-                <option>B</option>
-                <option>AB</option>
-                <option>O</option>
-            </select>
-        </div>
+      <div class="col-md-3">
+          <label>Blood Type</label>
+          <select class="form-control" asp-for="BloodType">
+              <option value="">-- All --</option>
+              <option>A</option>
+              <option>B</option>
+              <option>AB</option>
+              <option>O</option>
+          </select>
+      </div>
 
-        <div class="col-md-3">
-            <label>Rh Factor</label>
-            <select class="form-control" asp-for="RhFactor">
-                <option value="">-- All --</option>
-                <option>+</option>
-                <option>-</option>
-            </select>
-        </div>
+      <div class="col-md-3">
+          <label>Rh Factor</label>
+          <select class="form-control" asp-for="RhFactor">
+              <option value="">-- All --</option>
+              <option>+</option>
+              <option>-</option>
+          </select>
+      </div>
 
-        <div class="col-md-3">
-            <label>Status</label>
-            <select class="form-control" asp-for="Status">
-                <option value="">-- All --</option>
-                <option>Available</option>
-                <option>Issued</option>
-                <option>Reserved</option>
-                <option>Returned</option>
-                <option>Expired</option>
-            </select>
+      <div class="col-md-3">
+          <label>Status</label>
+          <select class="form-control" asp-for="Status">
+              <option value="">-- All --</option>
+              <option>Available</option>
+              <option>Issued</option>
+              <option>Reserved</option>
+              <option>Returned</option>
+              <option>Expired</option>
+          </select>
         </div>
     </div>
 

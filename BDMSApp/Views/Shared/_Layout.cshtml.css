@@ -49,4 +49,6 @@ button.accept-policy {
 
 .nav-item {
   border-left: 1px solid #ccc;
+  font-weight: 500;
+  font-size: 1.1rem;
 }
