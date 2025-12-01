@@ -28,4 +28,8 @@ public class DonorService: IDonorService
     var historylist = await _donorRepository.GetDonationHistory(Id);
     return historylist;
   }
+  public async Task UpdateMedicalHistory(MedicalHistoryListModel model)
+  {
+    await _donorRepository.UpdateMedicalHistory(model);
+  }
 }

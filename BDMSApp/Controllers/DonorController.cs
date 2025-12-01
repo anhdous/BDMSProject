@@ -31,6 +31,8 @@ public class DonorController: Controller
     var historylist = await _donorService.GetDonationHistory(int.Parse(donorId));
     return View(historylist);
   }
+
+  [HttpGet]
   public async Task<IActionResult> MedicalHistory()
   {
     var donorId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
@@ -41,6 +43,27 @@ public class DonorController: Controller
     var historylist = await _donorService.GetMedicalHistory(int.Parse(donorId));
     return View(historylist);
   }
+
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> MedicalHistory(List<MedicalHistoryListModel> model)
+{
+    if (!ModelState.IsValid)
+    {
+        // re-show the same view with validation errors
+        return View(model);
+    }
+
+    // Save each row
+    foreach (var row in model)
+    {
+        await _donorService.UpdateMedicalHistory(row);
+        // or your Dapper / SQL update here
+    }
+
+    // redirect back to GET to avoid repost on refresh
+    return RedirectToAction(nameof(MedicalHistory));
+}
 
   [HttpGet]
   public async Task<IActionResult> ScheduleAppointment()

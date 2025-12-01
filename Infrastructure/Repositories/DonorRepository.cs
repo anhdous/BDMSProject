@@ -3,7 +3,7 @@ using ApplicationCore.Interfaces.Repositories;
 using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-namespace Infrastructure.Repositories{
+namespace Infrastructure.Repositories { 
   public class DonorRepository : IDonorRepository
   {
   private readonly IConfiguration _cfg;
@@ -24,7 +24,9 @@ namespace Infrastructure.Repositories{
     var cs = _cfg.GetConnectionString("Default");
     using var conn = new SqlConnection(cs);
     var donors = await conn.QueryAsync<MedicalHistoryListModel>(
-        "SELECT * FROM dbo.MedicalHistory WHERE DonorId = @Id ORDER BY DiagnosisDate Desc", new { Id });
+        @"SELECT * FROM dbo.MedicalHistory 
+        WHERE DonorID = @Id 
+        ORDER BY DiagnosisDate Desc", new { Id });
     return donors.ToList();
   }
 
@@ -52,8 +54,34 @@ namespace Infrastructure.Repositories{
     var cs = _cfg.GetConnectionString("Default");
     using var conn = new SqlConnection(cs);
     var dh = await conn.QueryAsync<DonationHistoryListModel>(
-        "SELECT DonationDate, [Location], CollectedVolume, ht.FullName AS StaffName FROM dbo.Donation d JOIN HospitalStaff ht ON ht.StaffID = d.StaffID WHERE DonorId = @Id ORDER BY DonationDate Desc", new { Id });
+        @"SELECT DonationDate, [Location], CollectedVolume, ht.FullName AS StaffName 
+        FROM dbo.Donation d 
+        JOIN HospitalStaff ht ON ht.StaffID = d.StaffID 
+        WHERE DonorId = @Id 
+        ORDER BY DonationDate Desc", new { Id });
     return dh.ToList();
+  }
+
+  public async Task UpdateMedicalHistory(MedicalHistoryListModel model)
+  {
+    var cs = _cfg.GetConnectionString("Default");
+    using var conn = new SqlConnection(cs);
+    const string sql = @"
+      UPDATE dbo.MedicalHistory
+      SET ConditionName = @ConditionName,
+          DiagnosisDate = @DiagnosisDate,
+          RecoveryDate = @RecoveryDate,
+          Status = @Status
+      WHERE MID = @MID;";
+    var parameters = new
+    {
+      ConditionName = model.ConditionName,
+      DiagnosisDate = model.DiagnosisDate,
+      RecoveryDate = model.RecoveryDate,
+      Status = model.Status,
+      MID = model.MID
+    };
+    await conn.ExecuteAsync(sql, parameters);
   }
   }
 }
