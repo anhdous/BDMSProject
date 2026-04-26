@@ -1,34 +1,41 @@
-@model List<ApplicationCore.Models.DonorModel>
-@{
-    ViewData["Title"] = "Donor List";
-}
+@model DonorDetailsVM
+<div class="mb-3">
+  <h3>Donor Details</h3>
+</div>
 
-<h3>@ViewData["Title"]</h3>
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="mb-3">@Model.Donor.FullName</h5>
+    <p><strong>Blood Type:</strong> @Model.Donor.BloodType @Model.Donor.RhFactor</p>
+    <p><strong>Contact Number:</strong> @Model.Donor.Phone</p>
+    <p><strong>Email:</strong> @Model.Donor.Email</p>
+  </div>
+</div>
+
+<h5>Donation History</h5>
+
 <table class="table table-bordered table-striped">
-<thead>
-  <tr>
-      <th>Full Name</th>
-      <th>Date of Birth</th>
-      <th>Gender</th>
-      <th>Blood Type</th>
-      <th>Contact Number</th>
-      <th>Email</th>
-      <th>Address</th>
-
-  </tr>
+  <thead class="table-dark">
+    <tr>
+      <th>Date</th>
+      <th>Location</th>
+      <th>Volume</th>
+      <th>Storage</th>
+      <th>Staff Name</th>
+    </tr>
   </thead>
   <tbody>
-    @foreach (var d in Model)
+    @foreach (var d in Model.Donations)
     {
-        <tr>
-        <td>@d.FullName</td>
-        <td>@d.DOB.ToString("MMM dd, yyyy")</td>
-        <td>@d.Gender</td>
-        <td>@d.BloodType @d.RhFactor</td>
-        <td>@d.Phone</td>
-        <td>@d.Email</td>
-        <td>@d.Address</td>
-        </tr>
+      <tr>
+        <td>@d.DonationDate.ToString("MM/dd/yyyy")</td>
+        <td>@d.Location</td>
+        <td>@d.CollectedVolume cc</td>
+        <td>@d.StorageInfo</td>
+        <td>@d.StaffName</td>
+      </tr>
     }
   </tbody>
 </table>
+
+<a asp-action="DonorRecords" class="btn btn-secondary">Back</a>

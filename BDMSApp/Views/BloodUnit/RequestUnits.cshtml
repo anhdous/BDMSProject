@@ -1,0 +1,62 @@
+@using ApplicationCore.Models
+@model BloodRequestModel
+
+<div class="mb-3">
+  <h3>Request Blood Units</h3>
+</div>
+
+<form asp-action="CreateRequest" method="post">
+  <div class="mb-3">
+    <label class="form-label">Blood Type</label>
+    <select asp-for="BloodType" class="form-select">
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="AB">AB</option>
+      <option value="O">O</option>
+    </select>
+    <span asp-validation-for="BloodType" class="text-danger"></span>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Rh Factor</label>
+    <select asp-for="RhFactor" class="form-select">
+      <option value="+">+</option>
+      <option value="-">-</option>
+    </select>
+    <span asp-validation-for="RhFactor" class="text-danger"></span>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Component</label>
+    <select asp-for="ComponentType" class="form-select">
+      <option value="RBC">RBC</option>
+      <option value="Plasma">Plasma</option>
+      <option value="Platelets">Platelets</option>
+      <option value="Cryoprecipitate">Cryoprecipitate</option>
+    </select>
+    <span asp-validation-for="ComponentType" class="text-danger"></span>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Quantity</label>
+    <input asp-for="Quantity" type="number" class="form-control" />
+    <span asp-validation-for="Quantity" class="text-danger"></span>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Urgency</label>
+    <select asp-for="UrgencyLevel" class="form-select">
+      <option>Low</option>
+      <option>Medium</option>
+      <option>High</option>
+      <option>Critical</option>
+    </select>
+  </div>
+  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+  <button type="submit" class="btn btn-primary">Submit Request</button>
+</form>
+
+@section Scripts {
+  <partial name="_ValidationScriptsPartial" />
+}

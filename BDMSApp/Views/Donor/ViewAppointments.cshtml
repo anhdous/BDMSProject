@@ -1,0 +1,68 @@
+@model List<ApplicationCore.Models.AppointmentListModel>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+<div class="mb-3">
+    <h3>My Appointments</h3>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Appointment ID</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var a in Model)
+        {
+            <tr>
+                <td>@a.AppointmentID</td>
+                <td>@a.DateTime.ToString("MM/dd/yyyy")</td>
+                <td>@a.DateTime.ToString("hh:mm tt")</td>
+                <td>@a.Location</td>
+                <td>
+                    @if (a.DateTime > DateTime.Now)
+                    {
+                        <form asp-controller="Donor" asp-action="EditAppointment" asp-route-id="@a.AppointmentID" method="get"
+                              style="display:inline;">
+                            
+                            <button type="submit" class="btn btn-sm btn-warning me-2">Edit</button>
+                        </form>
+                        <form asp-controller="Donor" asp-action="DeleteAppointment" asp-route-id="@a.AppointmentID"
+                              method="post" style="display:inline;"
+                              onsubmit="return confirm('Are you sure you want to delete this appointment?');">
+
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <button class="btn btn-sm me-2 disabled-btn" disabled>Edit</button>
+                        <button class="btn btn-sm disabled-btn" disabled>Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.Count == 0)
+{
+    <p>No appointments found.</p>
+}
+
+<script>
+    setTimeout(() => {
+        const alertMessage = document.querySelector('.alert');
+        if (alertMessage) alertMessage.remove();
+    }, 3000);
+</script>

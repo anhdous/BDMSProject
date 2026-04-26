@@ -1,0 +1,90 @@
+@using ApplicationCore.Models
+@model DistributeViewModel
+
+<div class="mb-3">
+    <h3>Distribute Units</h3>
+</div>
+
+<div class="mb-3">
+<p>
+    <strong>Request:</strong> 
+    @Model.Request.BloodType@Model.Request.RhFactor | 
+    @Model.Request.ComponentType | 
+    Qty: @Model.Request.Quantity
+</p>
+
+<p>
+    <strong>Assigned:</strong> @Model.AssignedCount <br />
+    <strong>Remaining:</strong> 
+    <span id="remaining">@Model.Remaining</span>
+</p>
+</div>
+
+<form asp-action="Distribute" method="post">
+
+    <input type="hidden" asp-for="@Model.Request.RequestID" />
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Select</th>
+                <th>Unit ID</th>
+                <th>Volume</th>
+                <th>Collected</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var u in Model.AvailableUnits)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" name="selectedUnits" value="@u.UnitID" class="unit-checkbox" />
+                </td>
+                <td>@u.UnitID</td>
+                <td>@u.Volume</td>
+                <td>@u.CollectionDate.ToString("MM/dd/yyyy")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <button class="btn btn-primary">Confirm Distribution</button>
+</form>
+
+@section Scripts {
+<script>
+    const maxAllowed = @Model.Remaining;
+    let selectedCount = 0;
+
+    const checkboxes = document.querySelectorAll('.unit-checkbox');
+    const remainingDisplay = document.getElementById('remaining');
+    const button = document.querySelector('button[type="submit"]');
+
+    function updateButton() {
+        button.disabled = selectedCount === 0;
+    }
+
+    checkboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+
+            selectedCount = document.querySelectorAll('.unit-checkbox:checked').length;
+
+            // Prevent selecting too many
+            if (selectedCount > maxAllowed) {
+                cb.checked = false;
+                alert("You cannot select more than required units.");
+                return;
+            }
+
+            // Update remaining
+            remainingDisplay.textContent = maxAllowed - selectedCount;
+
+            // Enable/disable button
+            updateButton();
+        });
+    });
+
+    // Initialize button state
+    updateButton();
+</script>
+}

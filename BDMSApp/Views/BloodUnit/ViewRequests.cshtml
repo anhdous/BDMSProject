@@ -1,0 +1,60 @@
+@using ApplicationCore.Models
+@model List<BloodRequestModel>
+
+<div class="mb-3">
+  <h3>Pending Requests</h3>
+</div>
+
+
+@if (TempData["Success"] != null)
+{
+  <div class="alert alert-success">
+    @TempData["Success"]
+  </div>
+}
+
+<table class="table table-striped table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th>Blood</th>
+      <th>Component</th>
+      <th>Qty</th>
+      <th>Urgency</th>
+      <th>Request Date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var r in Model)
+    {
+      <tr>
+        <td>@r.BloodType@r.RhFactor</td>
+        <td>@r.ComponentType</td>
+        <td>@r.Quantity</td>
+        <td>@r.UrgencyLevel</td>
+        <td>@r.RequestDate.Value.Date</td>
+        <td>
+          @if (r.AvailableUnits > 0)
+          {
+            <a class="btn btn-primary" asp-action="Distribute" asp-route-id="@r.RequestID">
+              Distribute
+            </a>
+          }
+          else
+          {
+            <button class="btn btn-secondary" disabled>
+              No Available Units
+            </button>
+          }
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<script>
+  setTimeout(() => {
+    const alertMessage = document.querySelector('.alert');
+    if (alertMessage) alertMessage.remove();
+  }, 3000);
+</script>

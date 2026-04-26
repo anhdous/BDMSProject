@@ -20,7 +20,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var bds = await _bloodDriveService.GetAllBloodDrives();
+        var bds = await _bloodDriveService.GetOpenBloodDrives();
         return View(bds);
     }
 

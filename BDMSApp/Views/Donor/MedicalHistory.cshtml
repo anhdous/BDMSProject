@@ -1,56 +1,52 @@
 @model List<ApplicationCore.Models.MedicalHistoryListModel>
 
-@{
-    ViewData["Title"] = "Medical History Records";
-}
-
-<h3>@ViewData["Title"]</h3>
+<div class="mb-3">
+    <h3>Medical History Records</h3>
+</div>
 
 <form asp-action="MedicalHistory" method="post">
-  <table class="table table-bordered table-striped">
-    <thead>
-    <tr>
-        <th>Condition Name</th>
-        <th>Diagnosis Date</th>
-        <th>Recovery Date</th>
-        <th>Status</th>
-    </tr>
-    </thead>
-    <tbody>
-    @for (var i = 0; i < Model.Count; i++)
-    {
-      <tr>
-        @* Keep keys hidden so controller knows which record is which *@
-        <td>
-            <input asp-for="@Model[i].MID" type="hidden" />
-            <input asp-for="@Model[i].ConditionName" class="form-control" />
-        </td>
-        <td>
-            <input asp-for="@Model[i].DiagnosisDate" type="date" class="form-control" />
-        </td>
-        <td>
-            <div class="mb-1">
-                <input asp-for="@Model[i].RecoveryDate"
-                      type="date"
-                      class="form-control"
-                      asp-format="{0:yyyy-MM-dd}" />
-            </div>
-
-            @if (Model[i].RecoveryDate == null)
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Condition Name</th>
+                <th>Diagnosis Date</th>
+                <th>Recovery Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Count; i++)
             {
-                <small class="text-muted fst-italic">
-                    No recovery date on file
-                </small>
-            }
-        </td>
-                <td>
-            <input asp-for="@Model[i].Status" class="form-control" />
-        </td>
-      </tr>
-    }
-    </tbody>
-  </table>
+                <tr>
+                    @* Keep keys hidden so controller knows which record is which *@
+                    <td>
+                        <input asp-for="@Model[i].MID" type="hidden" />
+                        <input asp-for="@Model[i].ConditionName" class="form-control" />
+                    </td>
+                    <td>
+                        <input asp-for="@Model[i].DiagnosisDate" type="date" class="form-control" />
+                    </td>
+                    <td>
+                        <div class="mb-1">
+                            <input asp-for="@Model[i].RecoveryDate" type="date" class="form-control"
+                                   asp-format="{0:yyyy-MM-dd}" />
+                        </div>
 
-  <button type="submit" class="btn btn-primary">Save Changes</button>
-  <button type="reset" class="btn btn-primary ms-2">Cancel</button>
+                        @if (Model[i].RecoveryDate == null)
+                        {
+                            <small class="text-muted fst-italic">
+                                No recovery date on file
+                            </small>
+                        }
+                    </td>
+                    <td>
+                        <input asp-for="@Model[i].Status" class="form-control" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <button type="reset" class="btn btn-primary ms-2">Cancel</button>
 </form>

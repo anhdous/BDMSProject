@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>Manage Blood Drives</h3>
+  <a asp-action="Create" class="btn btn-primary">Add New Blood Drive</a>
+</div>
+
+@if (TempData["Success"] != null)
+{
+  <div class="alert alert-success">
+    @TempData["Success"]
+  </div>
+}
+<table class="table table-striped table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th>Title</th>
+      <th>Location</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Organizer</th>
+      <th style="width:150px;">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var d in Model)
+    {
+      var isPast = d.EndDate < DateTime.Today;
+
+      <tr>
+        <td>@d.Title</td>
+        <td>@d.Location</td>
+        <td>@d.StartDate.ToString("MM/dd/yyyy")</td>
+        <td>@d.EndDate.ToString("MM/dd/yyyy")</td>
+        <td>@d.Organizer</td>
+
+        <td>
+          @if (!isPast)
+          {
+            <!-- Edit button-->
+            <a asp-action="Edit" asp-route-id="@d.BDID" class="btn btn-sm btn-warning">Edit</a>
+
+            <!-- Delete button-->
+            <form asp-action="Delete" asp-route-id="@d.BDID" method="post" style="display:inline;">
+              <button type="submit" class="btn btn-sm btn-danger"
+                      onclick="return confirm('Are you sure you want to delete this blood drive? This action cannot be undone.');">
+                Delete
+              </button>
+            </form>
+          }
+          else
+          {
+            <!-- Disabled buttons -->
+            <button class="btn btn-sm disabled-btn" disabled>Edit</button>
+            <button class="btn btn-sm disabled-btn" disabled>Delete</button>
+          }
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<script>
+  setTimeout(() => {
+    const alertMessage = document.querySelector('.alert');
+    if (alertMessage) alertMessage.remove();
+  }, 3000);
+</script>

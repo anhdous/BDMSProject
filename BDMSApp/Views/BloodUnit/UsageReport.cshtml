@@ -1,14 +1,24 @@
-@model ApplicationCore.Models.BloodInventoryFilterModel
+@model ApplicationCore.Models.UsageReportFilterModel
 
 <div class="mb-3">
-    <h3>Blood Inventory Search</h3>
+    <h3>Usage Report</h3>
 </div>
 
 <form method="post">
     <div class="row mb-3">
         <div class="col-md-3 mb-3">
+            <label class="form-label">Start Date</label>
+            <input asp-for="StartDate" type="date" class="form-control" />
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label class="form-label">End Date</label>
+            <input asp-for="EndDate" type="date" class="form-control" />
+        </div>
+
+        <div class="col-md-3 mb-3">
             <label class="form-label">Component Type</label>
-            <select class="form-select" asp-for="ComponentType">
+            <select class="form-control" asp-for="ComponentType">
                 <option value="">-- All --</option>
                 <option>RBC</option>
                 <option>Plasma</option>
@@ -17,9 +27,9 @@
             </select>
         </div>
 
-        <div class="col-md-2 mb-3">
+        <div class="col-md-3 mb-3">
             <label class="form-label">Blood Type</label>
-            <select class="form-select" asp-for="BloodType">
+            <select class="form-control" asp-for="BloodType">
                 <option value="">-- All --</option>
                 <option>A</option>
                 <option>B</option>
@@ -28,28 +38,19 @@
             </select>
         </div>
 
-        <div class="col-md-2 mb-3">
+        <div class="col-md-3 mb-3">
             <label class="form-label">Rh Factor</label>
-            <select class="form-select" asp-for="RhFactor">
+            <select class="form-control" asp-for="RhFactor">
                 <option value="">-- All --</option>
                 <option>+</option>
                 <option>-</option>
             </select>
         </div>
-
-        <div class="col-md-2 mb-3">
-            <label class="form-label">Status</label>
-            <select class="form-select" asp-for="Status">
-                <option value="">-- All --</option>
-                <option>Available</option>
-                <option>Issued</option>
-                <option>Expired</option>
-            </select>
-        </div>
-        <div class="col-md-2 d-flex align-items-end mb-3">
-            <button class="btn btn-primary " type="submit">Search</button>
+        <div class="col-md-3 d-flex align-items-end mb-3">
+            <button class="btn btn-primary" type="submit">Search</button>
         </div>
     </div>
+
 </form>
 
 @if (Model.HasSearched)
@@ -62,14 +63,12 @@
             <thead class="table-dark">
                 <tr>
                     <th>Unit ID</th>
-                    <th>Component</th>
+                    <th>Component Type</th>
                     <th>Blood Type</th>
-                    <th>Rh</th>
                     <th>Volume</th>
-                    <th>Collection Date</th>
-                    <th>Expiry Date</th>
-                    <th>Storage Info</th>
-                    <th>Status</th>
+                    <th>Request Date</th>
+                    <th>Quantity</th>
+                    <th>Request Hospital</th>
                 </tr>
             </thead>
             <tbody>
@@ -78,13 +77,11 @@
                     <tr>
                         <td>@item.UnitID</td>
                         <td>@item.ComponentType</td>
-                        <td>@item.BloodType</td>
-                        <td>@item.RhFactor</td>
-                        <td>@item.Volume</td>
-                        <td>@item.CollectionDate.ToShortDateString()</td>
-                        <td>@item.ExpiryDate.ToShortDateString()</td>
-                        <td>@item.StorageInfo</td>
-                        <td>@item.Status</td>
+                        <td>@item.BloodType@item.RhFactor</td>
+                        <td>@item.Volume cc</td>
+                        <td>@item.RequestDate.ToShortDateString()</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.RequestHospital</td>
                     </tr>
                 }
             </tbody>
@@ -93,7 +90,7 @@
     else
     {
         <div class="alert alert-warning mt-3">
-            No inventory found matching your search criteria.
+            No data found matching your search criteria.
         </div>
     }
 }

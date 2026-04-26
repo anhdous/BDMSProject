@@ -1,11 +1,13 @@
 ﻿@model List<ApplicationCore.Models.BloodDriveModel>
 @{
-    ViewData["Title"] = "Blood Drives";
+    ViewData["Title"] = " Upcoming Blood Drives";
 }
+<div class="mb-3">
+    <h3>@ViewData["Title"]</h3>
+</div>
 
-<h3>@ViewData["Title"]</h3>
 <table class="table table-bordered table-striped">
-<thead>
+    <thead class="table-dark">
         <tr>
             <th>Name</th>
             <th>Location</th>
@@ -15,15 +17,15 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var p in Model)
-{
-    <tr>
-    <td>@p.Title</td>
-    <td>@p.Location</td>
-    <td>@p.StartDate.ToString("MMM dd, yyyy")</td>
-    <td>@p.EndDate.ToString("MMM dd, yyyy")</td>
-    <td>@p.Organizer</td>
-    </tr>
-}
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Title</td>
+                <td>@p.Location</td>
+                <td>@p.StartDate?.ToString("MM/dd/yyyy")</td>
+                <td>@p.EndDate?.ToString("MM/dd/yyyy")</td>
+                <td>@p.Organizer</td>
+            </tr>
+        }
     </tbody>
 </table>

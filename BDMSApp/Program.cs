@@ -14,6 +14,7 @@ var cs = builder.Configuration.GetConnectionString("Default");
 // Register repository so it can be injected
 builder.Services.AddScoped<IBloodDriveRepository, BloodDriveRepository>();
 builder.Services.AddScoped<IBloodDriveService, BloodDriveService>();
+builder.Services.AddScoped<IBloodUnitService,BloodUnitService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IDonorRepository, DonorRepository>();
@@ -30,6 +31,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 
 var app = builder.Build();
+app.Urls.Add("http://0.0.0.0:10000");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -39,17 +41,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseRouting();
-app.UseAuthentication();   // <-- required
-app.UseAuthorization();
 
-app.MapStaticAssets();
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+app.UseAuthentication(); 
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
-
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

@@ -1,0 +1,75 @@
+@model List<ApplicationCore.Models.BloodRequestModel>
+
+<h3>My Requests</h3>
+
+@if (TempData["Success"] != null)
+{
+  <div class="alert alert-success">
+    @TempData["Success"]
+  </div>
+}
+
+<table class="table table-bordered table-striped mt-3">
+  <thead class="table-dark">
+    <tr>
+      <th>Date</th>
+      <th>Blood</th>
+      <th>Component</th>
+      <th>Quantity</th>
+      <th>Urgency</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    @if (!Model.Any())
+    {
+      <tr>
+        <td colspan="6" class="text-center text-muted">
+          No requests found.
+        </td>
+      </tr>
+    }
+    else
+    {
+      @foreach (var r in Model)
+      {
+        <tr>
+          <td>@r.RequestDate?.ToString("MM/dd/yyyy")</td>
+
+          <td>
+            @r.BloodType@r.RhFactor
+          </td>
+
+          <td>@r.ComponentType</td>
+
+          <td>@r.Quantity</td>
+
+          <td>
+            <span class="badge bg-@(r.UrgencyLevel == "Critical" ? "danger" :
+              r.UrgencyLevel == "High" ? "warning" :
+              r.UrgencyLevel == "Medium" ? "info" :
+              "secondary")">
+              @r.UrgencyLevel
+            </span>
+          </td>
+
+          <td>
+            <span class="badge bg-@(r.Status == "Completed" ? "success" :
+              r.Status == "Partial" ? "warning" :
+              r.Status == "Approved" ? "primary" :
+              "secondary")">
+              @r.Status
+            </span>
+          </td>
+        </tr>
+      }
+    }
+  </tbody>
+</table>
+
+<script>
+  setTimeout(() => {
+    const alertMessage = document.querySelector('.alert');
+    if (alertMessage) alertMessage.remove();
+  }, 3000);
+</script>
