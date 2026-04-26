@@ -22,7 +22,7 @@ namespace Infrastructure.Repositories{
   public async Task<List<BloodDriveModel>> GetOpenBloodDrives()
   {
     const string sql = @"
-        SELECT BDID, Location, Title
+        SELECT BDID, Location, Title, StartDate, EndDate, Organizer
         FROM dbo.BloodDrive
         WHERE CAST(GETUTCDATE() AS date) <= EndDate
         ORDER BY StartDate;";

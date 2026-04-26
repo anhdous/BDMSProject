@@ -6,4 +6,5 @@ public class DonationHistoryListModel
     public string Location { get; set; }
     public int CollectedVolume { get; set; }
     public string StaffName { get; set; }
+    public string StorageInfo { get; set; }
   }

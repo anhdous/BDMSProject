@@ -5,5 +5,6 @@ namespace ApplicationCore.Interfaces.Services;
 public interface IUserService
 {
     Task<UserLoginSuccessModel> ValidateUser(UserLoginModel model);
+    Task<int?> GetHospitalIdByStaffId(int id);
 }
 

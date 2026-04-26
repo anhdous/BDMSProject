@@ -9,11 +9,11 @@ namespace ApplicationCore.Models
 {
     public class UserLoginModel
     {
-        [Required (ErrorMessage="Email should not be empty")]
-        [EmailAddress(ErrorMessage="Email should be in right format")]
-        [StringLength(50, ErrorMessage= "Email cannot exceed 50 characters")]
+        [Required (ErrorMessage="Email is required.")]
+        [EmailAddress(ErrorMessage="Invalid email.")]
+        [StringLength(50, ErrorMessage= "Email cannot exceed 50 characters.")]
         public string Email { get; set; }
-        [Required (ErrorMessage="Password should not be empty")]
+        [Required (ErrorMessage="Password is required.")]
         public string Password { get; set; }
 
     }

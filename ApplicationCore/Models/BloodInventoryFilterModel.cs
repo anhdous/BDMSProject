@@ -8,4 +8,5 @@ public class BloodInventoryFilterModel
     public string Status { get; set; }
 
     public List<BloodInventoryRecord> Results { get; set; }
+    public bool HasSearched { get; set; }
 }

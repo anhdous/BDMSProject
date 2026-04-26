@@ -17,15 +17,14 @@
           "/Users/anhdo.us/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net9.0"
+          "net8.0"
         ],
         "sources": {
-          "/opt/homebrew/Cellar/dotnet/9.0.8/libexec/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net9.0": {
-            "targetAlias": "net9.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -33,17 +32,11 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+        }
       },
       "frameworks": {
-        "net9.0": {
-          "targetAlias": "net9.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "imports": [
             "net461",
             "net462",
@@ -60,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/9.0.8/libexec/sdk/9.0.109/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet@8/8.0.125/libexec/sdk/8.0.125/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -77,15 +70,14 @@
           "/Users/anhdo.us/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net9.0"
+          "net8.0"
         ],
         "sources": {
-          "/opt/homebrew/Cellar/dotnet/9.0.8/libexec/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net9.0": {
-            "targetAlias": "net9.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {
               "/Users/anhdo.us/Desktop/BDMS/ApplicationCore/ApplicationCore.csproj": {
                 "projectPath": "/Users/anhdo.us/Desktop/BDMS/ApplicationCore/ApplicationCore.csproj"
@@ -97,17 +89,11 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+        }
       },
       "frameworks": {
-        "net9.0": {
-          "targetAlias": "net9.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Dapper": {
               "target": "Package",
@@ -142,7 +128,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/9.0.8/libexec/sdk/9.0.109/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet@8/8.0.125/libexec/sdk/8.0.125/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
